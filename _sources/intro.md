@@ -1,7 +1,7 @@
 # Introduction
 
 Whoever's reading this is probably a newcomer to the Rowan Aneurysm Project - so I'd like to say hi!
-My name is Chau Tran and I worked Dr. Hieu Nguyen and Dr. Thanh Nguyen's aneurysm research project throughout 
+My name is Chau Tran and I worked on Dr. Hieu Nguyen and Dr. Yupeng Li's aneurysm research project throughout 
 the summer and fall of 2021. If you ever have any questions/need help, feel free to contact me at tranch29@students.rowan.edu!
 
 ## Documentation Purpose
@@ -27,7 +27,7 @@ Our research primarily deals with [convolutional neural networks](https://www.yo
 would help to first get a basic mathematical understanding of convolutional neural networks and deep neural
 networks in general.
 
-#### Other Libraries
+### Other Libraries
 
 Inevitably, you will have to deal with image processing - the novelty of the project depends on the
 *process* in which we use machine learning.
