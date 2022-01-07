@@ -2,9 +2,9 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: Intro
+root: intro
 chapters:
-- file: EnvironmentSetup
-- file: FasterRCNN 
-- file: UNet 
-- file: CompletePipeline
+- file: environment-setup
+- file: faster-rcnn
+- file: unet 
+- file: complete-pipeline
