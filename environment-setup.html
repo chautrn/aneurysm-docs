@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Introduction &#8212; Rowan Aneurysm Project</title>
+    <title>Environment Setup &#8212; Rowan Aneurysm Project</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -51,7 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Environment Setup" href="environment-setup.html" />
+    <link rel="next" title="FasterRCNN" href="faster-rcnn.html" />
+    <link rel="prev" title="Introduction" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -89,15 +90,15 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1 current">
-  <a class="reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
    Introduction
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="environment-setup.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Environment Setup
   </a>
  </li>
@@ -157,7 +158,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/intro.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/environment-setup.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -177,7 +178,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fenvironment-setup.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -198,31 +199,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#documentation-purpose">
-   Documentation Purpose
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tech-stack">
-   Tech Stack
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#other-libraries">
-     Other Libraries
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -231,41 +207,22 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>Whoever’s reading this is probably a newcomer to the Rowan Aneurysm Project - so I’d like to say hi!
-My name is Chau Tran and I worked Dr. Hieu Nguyen and Dr. Thanh Nguyen’s aneurysm research project throughout
-the summer and fall of 2021. If you ever have any questions/need help, feel free to contact me at <a class="reference external" href="mailto:tranch29&#37;&#52;&#48;students&#46;rowan&#46;edu">tranch29<span>&#64;</span>students<span>&#46;</span>rowan<span>&#46;</span>edu</a>!</p>
-<div class="section" id="documentation-purpose">
-<h2>Documentation Purpose<a class="headerlink" href="#documentation-purpose" title="Permalink to this headline">¶</a></h2>
-<p>I hope that this documentation serves as a good way to introduce new members to my code if they ever need to use it.</p>
-<p>Since it will be hosted on Github, it’s also open-source! When you have a complicated code repo that needs
-explaining to even newer members coming after you, I hope you’ll find the time to add your own sections
-to this website. Additionally, if you spot any mistakes in the documentation, feel free to commit changes and
-fix them.</p>
-<p>The end goal is to make onboarding easier and let future members be more productive faster as they join the
-project.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="environment-setup">
+<h1>Environment Setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h1>
+<p>Sometimes, the most frustrating thing to do during onboarding is getting your developer environment to work. I’ll try to make as streamlined as possible in this section.</p>
+<p>There are a few ways to install the necessary Python libraries to run the different repos I have in Lambda. However, were it up to me, I would just copy and paste the Python
+environment that I currently have and run from its bin.</p>
+<p>Here’s how to do it:</p>
+<p>First, copy my python_env directory, which contains all the necessary libraries with this command:</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>cp -r /data/aneurysm/tranch29/python_env [destination-path]
+</pre></div>
 </div>
-<div class="section" id="tech-stack">
-<h2>Tech Stack<a class="headerlink" href="#tech-stack" title="Permalink to this headline">¶</a></h2>
-<p>Currently, we use <a class="reference external" href="https://www.python.org/">Python</a> as our main programming language and <a class="reference external" href="https://pytorch.org/">PyTorch</a> as our machine learning library.</p>
-<p>If you are new to Python and/or PyTorch, it may help to kill two birds with one stone by completing some
-<span class="xref myst">PyTorch tutorials</span> relevant to the project.</p>
-<p>Our research primarily deals with <a class="reference external" href="https://www.youtube.com/watch?v=YRhxdVk_sIs">convolutional neural networks</a>. It
-would help to first get a basic mathematical understanding of convolutional neural networks and deep neural
-networks in general.</p>
-<div class="section" id="other-libraries">
-<h3>Other Libraries<a class="headerlink" href="#other-libraries" title="Permalink to this headline">¶</a></h3>
-<p>Inevitably, you will have to deal with image processing - the novelty of the project depends on the
-<em>process</em> in which we use machine learning.</p>
-<p>The main image processing library we use is <a class="reference external" href="https://pypi.org/project/opencv-python/">OpenCV</a>.
-Knowing the ins-and-outs of the <a class="reference external" href="https://numpy.org/">numpy</a> library would also help, for which OpenCV and many
-PyTorch repositories depend on.</p>
-<p>In some image processing cases, <a class="reference external" href="https://scikit-image.org/">scikit-image</a> may also be helpful.</p>
+<p>To execute the python command with all the required libraries, you would then need to call on the python binary in python_\env.
+Say you copied it to your home directory. To use Python on a script named <a class="reference external" href="http://helloworld.py">helloworld.py</a> in your current directory, you would run:</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>~/python_env/bin/python helloworld.py
+</pre></div>
 </div>
-</div>
-<div class="toctree-wrapper compound">
-</div>
+<p>However, nobody wants to type the entire path every time they want to run a python path. I HIGHLY recommend <a class="reference external" href="https://www.tecmint.com/create-alias-in-linux/">setting up an alias</a>.</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -292,11 +249,18 @@ PyTorch repositories depend on.</p>
               
         
             <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="environment-setup.html" title="next page">
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="faster-rcnn.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Environment Setup</p>
+        <p class="prev-next-title">FasterRCNN</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
