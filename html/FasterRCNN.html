@@ -1,0 +1,713 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FasterRCNN &#8212; Rowan Aneurysm Project</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="U-Net" href="UNet.html" />
+    <link rel="prev" title="Environment Setup" href="EnvironmentSetup.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/rowan.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Rowan Aneurysm Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="EnvironmentSetup.html">
+   Environment Setup
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   FasterRCNN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="UNet.html">
+   U-Net
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="CompletePipeline.html">
+   Complete Pipeline
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/FasterRCNN.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FFasterRCNN.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset">
+   Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-source">
+   Dataset Source
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-script">
+   Dataset Script
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-implementation-walkthrough">
+   Dataset Implementation Walkthrough
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#seeds-and-reproducibility">
+     Seeds and Reproducibility
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#augmentations">
+     Augmentations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-dataset-class">
+     Main Dataset Class
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dataloader">
+     Dataloader
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training">
+   Training
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing">
+   Testing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#changeable-parameters">
+     Changeable Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#output">
+     Output
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="fasterrcnn">
+<h1>FasterRCNN<a class="headerlink" href="#fasterrcnn" title="Permalink to this headline">¶</a></h1>
+<p>FasterRCNN is a <a class="reference external" href="https://en.wikipedia.org/wiki/Object_detection">object-detection</a>
+neural network (think bounding boxes). Training and testing scripts can be found in
+the directory:
+<code class="docutils literal notranslate"><span class="pre">/data/aneurysm/tranch29/fasterrcnn</span></code> (to be uploaded to Github at a later date).</p>
+<p>For now, feel free to copy the directory recursively to your personal directory with <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">[path]</span> <span class="pre">[path</span> <span class="pre">destination]</span></code></p>
+<div class="section" id="dataset">
+<h2>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h2>
+<p>Before we dive into FasterRCNN, the dataset needs to be addressed.</p>
+<p>The current dataset for training and testing with FasterRCNN consists of 61 CT scans in
+.png format. They can be considered a single “slice” of a patient’s full torso, for which
+the ascending and descending aorta can be most clearly seen.</p>
+<p>These images were collected and annotated by Ronald Yang from the much bigger <a class="reference external" href="https://www.cancer.gov/about-nci/organization/ccg/research/structural-genomics/tcga">TCGA-LUAD</a> CT scan dataset.</p>
+<p>In this section, we’ll focus on the .png images and their respective bounding box annotations
+for FasterRCNN training and testing.</p>
+</div>
+<div class="section" id="dataset-source">
+<h2>Dataset Source<a class="headerlink" href="#dataset-source" title="Permalink to this headline">¶</a></h2>
+<p>The dataset can be found on Lambda here: <code class="docutils literal notranslate"><span class="pre">/data/aneurysm/tranch29/datasets/base</span></code>.</p>
+<p>Notice that there are a few subdirectories in this path. Please ignore them for now.</p>
+<p>The files/directories of interest are the following:</p>
+<ul class="simple">
+<li><p>the <code class="docutils literal notranslate"><span class="pre">_annotations.coco.json</span></code> file, which contains data on where the bounding boxes are in
+each image. This is in <a class="reference external" href="https://cocodataset.org/#home">COCO</a> format.</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">images</span></code> directory, which contains all the images.</p></li>
+</ul>
+</div>
+<div class="section" id="dataset-script">
+<h2>Dataset Script<a class="headerlink" href="#dataset-script" title="Permalink to this headline">¶</a></h2>
+<p>Back in the FasterRCNN directory, the best place to start would be in the dataloader.
+The dataloader class can be found in the <code class="docutils literal notranslate"><span class="pre">dataset.py</span></code> file. We’ll attempt to walk
+through the code as to get a good feel for how PyTorch dataloaders work.</p>
+<p>Datasets objects are important because they handle the process of loading and processing data for dataloaders (which will be explained later).
+Consider them the “middle-man” between raw data and the formatted data that machine learning models require as input.</p>
+<p>Typically, dataloaders return the original image in as a <a class="reference external" href="https://pytorch.org/docs/stable/tensors.html">PyTorch tensor</a> (think 2D array in the case of a grayscale image) and
+a target object, which contains the ground truth/the “goal” of the machine learning model.</p>
+</div>
+<div class="section" id="dataset-implementation-walkthrough">
+<h2>Dataset Implementation Walkthrough<a class="headerlink" href="#dataset-implementation-walkthrough" title="Permalink to this headline">¶</a></h2>
+<p>In this section, I will highlight important sections of the <code class="docutils literal notranslate"><span class="pre">dataset.py</span></code> file and try to explain them as best as I can.</p>
+<div class="section" id="seeds-and-reproducibility">
+<h3>Seeds and Reproducibility<a class="headerlink" href="#seeds-and-reproducibility" title="Permalink to this headline">¶</a></h3>
+<p>– Line 23, <a class="reference external" href="http://dataset.py">dataset.py</a> –</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">imgaug</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After all the imports, you’ll notice a section of code setting the random seeds of the different libraries to the value <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+This is because some pre-processing steps apply a random effect to images. Random seeds are set to some constant (in this case, 0) so that these random effects are reproducible.</p>
+</div>
+<div class="section" id="augmentations">
+<h3>Augmentations<a class="headerlink" href="#augmentations" title="Permalink to this headline">¶</a></h3>
+<p>– Line 27, <a class="reference external" href="http://dataset.py">dataset.py</a> –</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># For training</span>
+<span class="n">aug_transform</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+	<span class="n">A</span><span class="o">.</span><span class="n">RandomRotate90</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+	<span class="n">A</span><span class="o">.</span><span class="n">Blur</span><span class="p">(</span><span class="n">blur_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+	<span class="n">A</span><span class="o">.</span><span class="n">RandomBrightnessContrast</span><span class="p">(</span><span class="n">brightness_limit</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">contrast_limit</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+	<span class="n">ToTensorV2</span><span class="p">()],</span>
+	<span class="n">bbox_params</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">BboxParams</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;pascal_voc&#39;</span><span class="p">,</span> <span class="n">label_fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]))</span>
+
+<span class="n">default_transform</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+	<span class="n">ToTensorV2</span><span class="p">()],</span>
+	<span class="n">bbox_params</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">BboxParams</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;pascal_voc&#39;</span><span class="p">,</span> <span class="n">label_fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>The above code details two different augmentations a dataloader can be set to have. One is the <code class="docutils literal notranslate"><span class="pre">aug_transform</span></code> augmentations, which randomly
+rotates an image by 90 degrees, blurs it by a random intensity, and adjusts its brightness and contrast by some amount. Note that, if applicable,
+these transformations are also applied to the bounding boxes (such as the rotating transformation).</p>
+<p>The other is the <code class="docutils literal notranslate"><span class="pre">default_transform</span></code>, effectively does nothing and leaves the original image and bounding boxes as is.</p>
+<p>Note that both augmentations share a <code class="docutils literal notranslate"><span class="pre">ToTensorV2</span></code> transformation. This converts the read image input (which would be a numpy array) into a PyTorch tensor.
+This is important because most PyTorch machine learning models need their images in tensor format rather than numpy format.</p>
+<p>Feel free to make your own augmentations. Explore what options you have in the
+<a class="reference external" href="https://albumentations.ai/docs/api_reference/full_reference/">Albumentations library documentation</a>.</p>
+</div>
+<div class="section" id="main-dataset-class">
+<h3>Main Dataset Class<a class="headerlink" href="#main-dataset-class" title="Permalink to this headline">¶</a></h3>
+<p>– Line 120, <a class="reference external" href="http://dataset.py">dataset.py</a> —</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AneurysmDataset</span><span class="p">(</span><span class="n">dset</span><span class="o">.</span><span class="n">CocoDetection</span><span class="p">):</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">annFile</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">annFile</span><span class="p">,</span> <span class="n">transform</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+		<span class="n">coco</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coco</span>
+		<span class="n">img_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ids</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+		<span class="c1"># Get annotations</span>
+		<span class="n">ann_ids</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">getAnnIds</span><span class="p">(</span><span class="n">imgIds</span><span class="o">=</span><span class="n">img_id</span><span class="p">)</span>
+		<span class="n">annotations</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">loadAnns</span><span class="p">(</span><span class="n">ann_ids</span><span class="p">)</span>
+
+		<span class="c1"># Filter out degenerate bounding boxes with 0 width or height</span>
+		<span class="n">annotations</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">annotations</span>
+					   <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="s1">&#39;bbox&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">a</span><span class="p">[</span><span class="s1">&#39;bbox&#39;</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+
+		<span class="n">boxes</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;bbox&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">annotations</span><span class="p">]</span>
+		<span class="n">area</span> <span class="o">=</span> <span class="p">[]</span>
+
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">boxes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">boxes</span><span class="p">)):</span>
+				<span class="n">area</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">])</span>
+
+				<span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+							<span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span>
+							<span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]]</span>
+				<span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+		<span class="c1"># Labels</span>
+		<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;category_id&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">annotations</span><span class="p">]</span>
+		<span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+
+		<span class="n">iscrowd</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+		<span class="c1"># Get image</span>
+		<span class="n">img_name</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">loadImgs</span><span class="p">(</span><span class="n">img_id</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;file_name&#39;</span><span class="p">]</span>
+		<span class="n">img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="n">img_name</span><span class="p">)</span>
+		<span class="n">img</span> <span class="o">=</span> <span class="n">read_img</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+		<span class="c1"># Get mask images (for U-Net)</span>
+		<span class="n">mask_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;masks&#39;</span><span class="p">,</span> <span class="n">img_name</span><span class="p">)</span>
+		<span class="n">mask</span> <span class="o">=</span> <span class="n">read_img</span><span class="p">(</span><span class="n">mask_path</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+		<span class="c1"># Transforms</span>
+		<span class="n">transformed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">img</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">bboxes</span><span class="o">=</span><span class="n">boxes</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+		<span class="n">img</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+		<span class="n">mask</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span>
+		<span class="n">boxes</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">[</span><span class="s1">&#39;bboxes&#39;</span><span class="p">]</span>
+
+		<span class="c1"># Convert box to tensors</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">boxes</span><span class="p">)):</span>
+			<span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">:</span>
+				<span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+		<span class="n">boxes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">boxes</span><span class="p">)</span>
+
+		<span class="c1"># Build target</span>
+		<span class="n">target</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="n">target</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mask</span>
+		<span class="n">target</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">boxes</span>
+		<span class="n">target</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span>
+		<span class="n">target</span><span class="p">[</span><span class="s1">&#39;image_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">img_id</span><span class="p">])</span>
+		<span class="n">target</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+		<span class="n">target</span><span class="p">[</span><span class="s1">&#39;iscrowd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iscrowd</span>
+
+		<span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">img_name</span>
+</pre></div>
+</div>
+<p>This is the Dataset class. To instantiate it, three things are needed:</p>
+<ol class="simple">
+<li><p>The root directory of the dataset is passed in (ex: <code class="docutils literal notranslate"><span class="pre">/data/aneurysm/tranch29/datasets/base</span></code>).</p></li>
+<li><p>The path of the annotation file (ex: <code class="docutils literal notranslate"><span class="pre">/data/aneurysm/tranch29/datasets/base/_annotations.coco.json</span></code>).</p></li>
+<li><p>And the augmentation (ex: <code class="docutils literal notranslate"><span class="pre">default_aug</span></code>, as previously mentioned).</p></li>
+</ol>
+<p>You can treat it as an array of data entries. For example, if you wanted to access the first data entry, which would include the image tensor, the target object, and the image name,
+just use Python’s bracket notation.</p>
+<p>Ex:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">myDataset</span> <span class="o">=</span> <span class="n">AneurysmDataset</span><span class="p">(</span><span class="s1">&#39;/data/aneurysm/tranch29/datasets/base&#39;</span><span class="p">,</span> <span class="s1">&#39;/data/aneurysm/tranch29/datasets/base/_annotation.coco.json&#39;</span><span class="p">,</span> <span class="n">default_aug</span><span class="p">)</span>
+<span class="n">entry</span> <span class="o">=</span> <span class="n">myDataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+<span class="c1"># Will print tuple containing image, target object, and image name</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dataloader">
+<h3>Dataloader<a class="headerlink" href="#dataloader" title="Permalink to this headline">¶</a></h3>
+<p>Dataloaders are essential for training machine learning models. They are wrappers for the Dataset class and allow
+for easier access to the data by allowing to put them in batches for model training.</p>
+<p>— Line 187, <a class="reference external" href="http://dataset.py">dataset.py</a> —</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_loaders</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">anno_path</span><span class="p">,</span> <span class="n">isKFold</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">master_set</span> <span class="o">=</span> <span class="n">AneurysmDataset</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">anno_path</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">default_transform</span><span class="p">)</span>
+    <span class="c1"># master_set = _coco_remove_images_without_annotations(master_set)</span>
+
+    <span class="k">if</span> <span class="n">isKFold</span><span class="p">:</span>
+        <span class="c1"># Create KFolds from master set</span>
+        <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">n_splits</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="n">shuffle</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+        <span class="n">fold_indices</span> <span class="o">=</span> <span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">master_set</span><span class="p">)</span>
+
+        <span class="n">train_test_folds</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">fold</span><span class="p">,</span> <span class="p">(</span><span class="n">train_indices</span><span class="p">,</span> <span class="n">test_indices</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fold_indices</span><span class="p">):</span>
+            <span class="c1"># Debugging</span>
+            <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FOLD:&#39;</span><span class="p">,</span> <span class="n">fold</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;TRAINING: &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">train_indices</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;TESTING: &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">test_indices</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">()</span>
+
+            <span class="n">train_subset</span> <span class="o">=</span> <span class="n">Subset</span><span class="p">(</span><span class="n">master_set</span><span class="p">,</span> <span class="n">train_indices</span><span class="p">)</span>
+            <span class="n">test_subset</span> <span class="o">=</span> <span class="n">Subset</span><span class="p">(</span><span class="n">master_set</span><span class="p">,</span> <span class="n">test_indices</span><span class="p">)</span>
+            <span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_subset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">collate_fn</span><span class="o">=</span><span class="n">collate_fn</span><span class="p">)</span>
+            <span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_subset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">collate_fn</span><span class="o">=</span><span class="n">collate_fn</span><span class="p">)</span>
+
+            <span class="n">train_test_folds</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">train_test_folds</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Make dataloader from one single dataset</span>
+        <span class="n">dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">master_set</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="n">collate_fn</span><span class="o">=</span><span class="n">collate_fn</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">dataloader</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Dataloaders are created in this function. However, it does a little bit more than make loaders - it also
+creates loaders for <a class="reference external" href="https://machinelearningmastery.com/k-fold-cross-validation/">k-fold cross-validation</a>.</p>
+<p>Further details on k-fold cross-validation can be read in the link above. It is important in small
+datasets such as the one we have in this project - for both training and testing.</p>
+</div>
+</div>
+<div class="section" id="training">
+<h2>Training<a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h2>
+<p>The current training script can be found in <code class="docutils literal notranslate"><span class="pre">train.py</span></code> in the FasterRCNN directory.</p>
+<p>At the moment, many of the parameters are hard-coded in the script, so it may be easier to implement an
+argument parsing function in the future.</p>
+<p>For now, however, I will go over some of the change-able hard-coded parameters in the training script.</p>
+<p>— Line 5, <a class="reference external" href="http://train.py">train.py</a> —</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">train_path</span> <span class="o">=</span> <span class="s1">&#39;../datasets/base&#39;</span>
+<span class="n">train_anno</span> <span class="o">=</span> <span class="s1">&#39;../datasets/base/_annotations.coco.json&#39;</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>These variables define where the dataset and annotation file is located. The k-fold dataloaders will be built
+from it. If you have another dataset with COCO annotations that you would like
+to train on, feel free to change these variables as needed.</p>
+<p>— Line 16, <a class="reference external" href="http://train.py">train.py</a> —</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">lr_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">epoch</span><span class="p">:</span> <span class="mf">0.97</span> <span class="o">**</span> <span class="n">epoch</span>
+<span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.0005</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lr</span></code> defines the <a class="reference external" href="https://en.wikipedia.org/wiki/Learning_rate">learning rate</a> of the training loop. Typically,
+the learning rate is kept at a pretty low range, but definitely try to play around with it if you are
+training a new model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lr_func</span></code> defines the learning rate function, which is a function of the current training <a class="reference external" href="https://www.jigsawacademy.com/blogs/ai-ml/epoch-in-machine-learning">epoch</a>.
+Currently, this function is <span class="math notranslate nohighlight">\(learning\_rate = 0.97^{current\_epoch}\)</span></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can opt out of using this custom learning rate function altogether and use
+PyTorch’s ReduceLROnPlateau function, which may be a better choice in some cases.
+Simply replace the scheduler variable on line 29 with <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.ReduceLROnPlateau.html">torch.optim.lr_scheduler.ReduceLROnPlateau</a> and whatever the appropriate parameters are.</p>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">momentum</span></code> defines the <a class="reference external" href="https://towardsdatascience.com/stochastic-gradient-descent-with-momentum-a84097641a5d">momentum</a> value, which would later be passed into PyTorch’s <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.optim.SGD.html">SGD</a> implementation for backpropagation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weight_decay</span></code> defines a value than reduces the values of the model weights. In simple terms, it
+prevents one weight from having too large of a value, which usually leads to overfitting.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">epochs</span></code> defines how many epochs the model will train on in each fold. More can be read about it <a class="reference external" href="https://www.jigsawacademy.com/blogs/ai-ml/epoch-in-machine-learning">here</a>.</p></li>
+</ul>
+<p>— Line 24, <a class="reference external" href="http://train.py">train.py</a> —</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+    <span class="c1"># Reset model parameters</span>
+	<span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;./initial_weights.pth&#39;</span><span class="p">))</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Here defines the initial weights from which each fold will start at.
+The <code class="docutils literal notranslate"><span class="pre">initial_weights.pth</span></code> weight file contains weights with random values.
+However, if you would like to start from pre-trained weights, swap out the
+<code class="docutils literal notranslate"><span class="pre">torch.load</span></code> function’s parameter with another valid weight file that matches
+the FasterRCNN architecture.</p>
+<p>— Line 75, <a class="reference external" href="http://train.py">train.py</a> —</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+            <span class="k">if</span> <span class="n">train_iters_total</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Iteration </span><span class="si">{</span><span class="n">train_iters_total</span><span class="si">}</span><span class="s1"> loss: </span><span class="si">{</span><span class="n">train_loss</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">train_loss_total</span> <span class="o">+=</span> <span class="n">train_loss</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Here defines how often the training loss will be printed. The frequency of the print statement
+can be adjusted in the conditional. This was used to record training loss for each
+fold, piping the print output into a log file.</p>
+<p>— Line 79 —</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+        <span class="c1"># if epoch % 20 == 0:</span>
+        <span class="c1">#     torch.save(model.state_dict(), f&#39;./fold{fold+1}_epoch{epoch}_frcnn_trained.pth&#39;)</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Here defines how often the model weights are saved. Uncomment these lines and change
+the conditional to reflect how often you would want model weights to be saved. Note
+that the model weights are saved at the end of the training process anyways and saving
+more weights in between can slow down training time, so uncomment if you are, for example, investigating overfitting.</p>
+<p>— Line 92 —</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="sa">f</span><span class="s1">&#39;./fold</span><span class="si">{</span><span class="n">fold</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">_epoch</span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s1">_frcnn_trained.pth&#39;</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Lastly, here is the path of where model weights will be saved, according to fold and
+epoch. Adjust accordingly.</p>
+<p>To start training, just run the <code class="docutils literal notranslate"><span class="pre">train.py</span></code> file. You might want to pipe the output to a text file, which contains the model’s loss for each epoch, to process later:</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>[path-to-python-env-binary] train.py &gt; training_log.txt
+</pre></div>
+</div>
+<p>If this is unclear, please reference the <a class="reference internal" href="EnvironmentSetup.html"><span class="doc std std-doc">environment setup page</span></a>.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>Testing is done in a separate script in the same directory named <code class="docutils literal notranslate"><span class="pre">test.py</span></code>.</p>
+<p>In this section, I will walk through some of the parameters you can change and what the output means. I suspect the first script to become obsolete (as the team gets more
+data and change/add post-processing steps), but it is good to see how to load testing images into a FasterRCNN model.</p>
+<div class="section" id="changeable-parameters">
+<h3>Changeable Parameters<a class="headerlink" href="#changeable-parameters" title="Permalink to this headline">¶</a></h3>
+<p>— Line 103 —</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+	<span class="n">train_path</span> <span class="o">=</span> <span class="s1">&#39;../datasets/base&#39;</span>
+	<span class="n">train_anno</span> <span class="o">=</span> <span class="s1">&#39;../datasets/base/_annotations.coco.json&#39;</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Here is the location of the COCO dataset being loaded in. Folds will be made
+automatically in the testing function - feel free to trace back the code if you
+want, but it calls the <code class="docutils literal notranslate"><span class="pre">get_loader</span></code> function <a class="reference external" href="###Dataloaders">referenced before</a>.</p>
+<p>— Line 118 —</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+	<span class="n">iou_threshold</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># IOU threshold needed for a prediction to be correct</span>
+	<span class="n">confidence_threshold</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="c1"># Will filter out all boxes below this threshold</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Here defines the IOU threshold and the confidence threshold:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">iou_threshold</span></code> defines the <a class="reference external" href="https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/">intersection-over-union/Jaccard index</a> a bounding box
+needs to achieve with respect to the ground truth to be considered a true positive.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">confidence_threshold</span></code> defines the confidence a model’s output needs to have to even be considered a true positive or false positive. I.E. all bounding boxes with a confidence
+value below this threshold will be filtered out before any analysis.</p></li>
+</ul>
+<p>— Line 118 —</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+	         <span class="n">weights_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;paths/crossfold/cv60/fold</span><span class="si">{</span><span class="n">fold</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">_epoch60_frcnn_trained.pth&#39;</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Here defines the weight files. Change it to fit whatever format you have saved the weights for each fold.</p>
+</div>
+<div class="section" id="output">
+<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
+<p>The testing script outputs a series of statistics for each fold, then the same series of statistics averages across all the folds.</p>
+<p>Here are some of what those terms mean:</p>
+<ul class="simple">
+<li><p>TP - stands for true positive, the amount of times a bounding box correctly labeled an aorta.</p></li>
+<li><p>FP - stands for false positive, the amount of times a bounding box was wrong, either with respect to its IOU or its label.</p></li>
+<li><p>FN - stands for false negative, the amount of times an aorta was NOT labeled. I.E. times the model missed an aorta.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The terms below all reference the <a class="reference external" href="https://jonathan-hui.medium.com/map-mean-average-precision-for-object-detection-45c121a31173">mean average precision score</a>. It is a common metric used
+when evaluating object detection models.</p>
+</div>
+<ul class="simple">
+<li><p>AAP - stands for the mean average precision of ascending aortas only.</p></li>
+<li><p>DAP - stands for the mean average precision of descending aortas only.</p></li>
+<li><p>mAP - stands for the mean average precision of all aortas regardless of label.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="EnvironmentSetup.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Environment Setup</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="UNet.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">U-Net</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Chau Tran<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
