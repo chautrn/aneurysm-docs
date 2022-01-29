@@ -8,3 +8,4 @@ chapters:
 - file: faster-rcnn
 - file: unet 
 - file: complete-pipeline
+- file: dicom

@@ -1,7 +1,7 @@
 # Introduction
 
 Whoever's reading this is probably a newcomer to the Rowan Aneurysm Project - so I'd like to say hi!
-My name is Chau Tran and I worked Dr. Hieu Nguyen and Dr. Thanh Nguyen's aneurysm research project throughout 
+My name is Chau Tran and I worked on Dr. Hieu Nguyen and Dr. Yupeng Li's aneurysm research project throughout 
 the summer and fall of 2021. If you ever have any questions/need help, feel free to contact me at tranch29@students.rowan.edu!
 
 ## Documentation Purpose
@@ -21,13 +21,13 @@ project.
 Currently, we use [Python](https://www.python.org/) as our main programming language and [PyTorch](https://pytorch.org/) as our machine learning library.
 
 If you are new to Python and/or PyTorch, it may help to kill two birds with one stone by completing some
-[PyTorch tutorials](./PyTorch-tutorials.md) relevant to the project.
+[PyTorch tutorials](https://pytorch.org/tutorials/beginner/basics/intro.html) relevant to the project.
 
 Our research primarily deals with [convolutional neural networks](https://www.youtube.com/watch?v=YRhxdVk_sIs). It
 would help to first get a basic mathematical understanding of convolutional neural networks and deep neural
 networks in general.
 
-#### Other Libraries
+### Other Libraries
 
 Inevitably, you will have to deal with image processing - the novelty of the project depends on the
 *process* in which we use machine learning.
