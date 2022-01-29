@@ -346,7 +346,7 @@ To start training, just run the `train.py` file. You might want to pipe the outp
 [path-to-python-env-binary] train.py > training_log.txt
 ```
 
-If this is unclear, please reference the [environment setup page](EnvironmentSetup.md).
+If this is unclear, please reference the [environment setup page](environment-setup.md).
 
 ## Testing
 

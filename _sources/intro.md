@@ -21,7 +21,7 @@ project.
 Currently, we use [Python](https://www.python.org/) as our main programming language and [PyTorch](https://pytorch.org/) as our machine learning library.
 
 If you are new to Python and/or PyTorch, it may help to kill two birds with one stone by completing some
-[PyTorch tutorials](./PyTorch-tutorials.md) relevant to the project.
+[PyTorch tutorials](https://pytorch.org/tutorials/beginner/basics/intro.html) relevant to the project.
 
 Our research primarily deals with [convolutional neural networks](https://www.youtube.com/watch?v=YRhxdVk_sIs). It
 would help to first get a basic mathematical understanding of convolutional neural networks and deep neural
